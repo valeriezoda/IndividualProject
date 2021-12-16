@@ -1,6 +1,6 @@
 let count = 0;
 
-const Supersector = {
+const Super = {
 "0000": "Total nonfarm",
 "0500": "Total private",
 "0600": "Goods-producing",
@@ -24,7 +24,7 @@ const Supersector = {
 "8000": "Other services",
 "9000": "Government"
 };
-let SupersectorKeys = Object.keys(Supersector);
+let SuperKeys = Object.keys(Super);
 
 
 const CHART_COLORS = {
@@ -91,7 +91,7 @@ function responseHandler() {
       backgroundColor: "",
       hidden:true
 }
-sectorline.label = (Supersector[seriesID.substring(3,7)]);
+sectorline.label = (Super[seriesID.substring(3,7)]);
 sectorline.borderColor = (CHART_COLORS_KEYS[count]);
 sectorline.backgroundColor = (CHART_COLORS_50_Percent_KEY[count]);
 if(flag == false){
@@ -130,7 +130,7 @@ const config = {
       },
       title: {
         display: true,
-        text: 'US Labor Statistics: Number of Employees in Thousands'
+        text: 'Number of Employees in Thousands: US Labor Stats'
       }
     }
   }
@@ -142,12 +142,12 @@ const myChart = new Chart(
     config);
 
 
-for (i = 0; i < SupersectorKeys.length; i++){
-let call = new XMLHttpRequest()
-call.addEventListener("load", responseHandler);
+for (i = 0; i < SuperKeys.length; i++){
+let hold = new XMLHttpRequest()
+hold.addEventListener("load", responseHandler);
 let x = "https://api.bls.gov/publicAPI/v2/timeseries/data/CEU";
 let z = "000001?registrationkey=245bd84812f34c6b89356c491e78dcca";
-call.open("GET", x + SupersectorKeys[i] + z);
-call.responseType = "json";
-call.send();
+hold.open("GET", x + SuperKeys[i] + z);
+hold.responseType = "json";
+hold.send();
 }
